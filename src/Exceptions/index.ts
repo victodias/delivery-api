@@ -2,7 +2,7 @@ export class Exception {
   message: string
   statusCode: number
 
-  constructor(message: string = 'Bad request', statusCode: number = 400) {
+  constructor(message = 'Bad request', statusCode = 400) {
     this.message = message
     this.statusCode = statusCode
   }

@@ -1,7 +1,5 @@
 import { Request, Response } from 'express'
-import { Exceptions } from '../../Exceptions'
 import { CreateClientUseCase } from './CreateClientUseCase'
-// import { ClientAlreadyExistsException } from '../../Exceptions/ClientAlreadyExistsException'
 
 export class CreateClientController {
   async handle(request: Request, response: Response) {

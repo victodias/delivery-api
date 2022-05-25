@@ -1,11 +1,10 @@
 import { Exception } from '../Exceptions'
-import { NextFunction, Request, Response } from 'express'
+import { Request, Response } from 'express'
 
 export const handleError = async (
   error: Error,
   _request: Request,
-  response: Response,
-  _next: NextFunction
+  response: Response
 ) => {
   if (error instanceof Exception) {
     return response

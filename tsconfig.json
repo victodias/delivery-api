@@ -1,11 +1,10 @@
 {
-   "compilerOptions": {
-      "sourceMap": true,
-      "outDir": "build",
-      "strict": true,
-      "lib": [
-         "esnext"
-      ],
-      "esModuleInterop": true
-   }
+  "compilerOptions": {
+    "baseUrl": "src",
+    "sourceMap": true,
+    "outDir": "build",
+    "strict": true,
+    "lib": ["esnext"],
+    "esModuleInterop": true
+  }
 }

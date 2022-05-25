@@ -1,10 +1,11 @@
 import { Exception } from '../Exceptions'
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 
 export const handleError = async (
   error: Error,
   _request: Request,
-  response: Response
+  response: Response,
+  next: NextFunction
 ) => {
   if (error instanceof Exception) {
     return response
@@ -12,8 +13,10 @@ export const handleError = async (
       .json({ message: error.message, status: 'error', code: error.statusCode })
   }
 
-  return response.status(500).json({
+  response.status(500).json({
     status: 'error',
     message: 'Internal server error'
   })
+
+  next()
 }

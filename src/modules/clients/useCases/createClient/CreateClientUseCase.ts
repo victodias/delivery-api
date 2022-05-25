@@ -16,6 +16,7 @@ export class CreateClientUseCase {
     })
 
     if (clientExists) {
+      console.log("im here!!!!!!!!!!!!!!!!!")
       throw new ClientAlreadyExistsException()
     }
 

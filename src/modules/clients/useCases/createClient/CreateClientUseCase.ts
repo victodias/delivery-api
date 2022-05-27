@@ -5,6 +5,7 @@ import { ClientAlreadyExistsException } from '../../Exceptions/ClientAlreadyExis
 interface ICreateClient {
   username: string
   password: string
+  role: 'user' | 'deliveryman'
 }
 
 export class CreateClientUseCase {

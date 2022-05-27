@@ -20,6 +20,7 @@ model Clients {
   id       String @id @default(uuid())
   username String @unique
   password String
+  role     String?
 
   Deliveries Deliveries[]
   @@map("clients")

@@ -1,6 +1,8 @@
 import { prisma } from '../../../../database/prismaClient'
 import { hash } from 'bcrypt'
 import { ClientAlreadyExistsException } from '../../Exceptions/ClientAlreadyExistsException'
+import { RequiredFieldException } from '../../../../Exceptions/RequiredFieldException'
+import { getEmptyRequiredField } from '../../../../helpers/validations'
 
 interface ICreateClient {
   username: string
@@ -9,15 +11,22 @@ interface ICreateClient {
 }
 
 export class CreateClientUseCase {
-  async execute({ username, password }: ICreateClient) {
+  async execute({ username, password, role }: ICreateClient) {
     const clientExists = await prisma.clients.findFirst({
       where: {
         username
       }
     })
 
+    const requestBody: { [key: string]: string } = { username, password, role }
+
+    const emptyField = getEmptyRequiredField(requestBody)
+
+    if (emptyField.length > 0) {
+      throw new RequiredFieldException(emptyField)
+    }
+
     if (clientExists) {
-      console.log("im here!!!!!!!!!!!!!!!!!")
       throw new ClientAlreadyExistsException()
     }
 
@@ -26,7 +35,8 @@ export class CreateClientUseCase {
     const client = await prisma.clients.create({
       data: {
         username,
-        password: hashPassword
+        password: hashPassword,
+        role
       }
     })
     return client

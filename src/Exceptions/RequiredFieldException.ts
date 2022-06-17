@@ -6,6 +6,11 @@ export class RequiredFieldException extends Exception {
   constructor(fields: string[]) {
     super()
 
+    this.fields = fields
+    this.message = this.getMessage(fields)
+  }
+
+  private getMessage(fields: string[]) {
     const penultPositionArray = fields.length - 1
 
     const readableFields = fields.reduce(
@@ -16,12 +21,8 @@ export class RequiredFieldException extends Exception {
       }
     )
 
-    const message =
-      fields.length > 1
-        ? `Os campos '${readableFields}' são obrigatórios.`
-        : `O campo '${readableFields}' é obrigatório.`
-
-    this.fields = fields
-    this.message = message
+    return fields.length > 1
+      ? `Os campos '${readableFields}' são obrigatórios.`
+      : `O campo '${readableFields}' é obrigatório.`
   }
 }

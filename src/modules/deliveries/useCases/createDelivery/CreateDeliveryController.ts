@@ -3,13 +3,14 @@ import { CreateDeliveryUseCase } from './CreateDeliveryUseCase'
 
 export class CreateDeliveryController {
   async handle(request: Request, response: Response) {
-    const { item_name, id_client } = request.body
+    const { item_name } = request.body
+    const { user_id } = request
 
     const createDeliveryUseCase = new CreateDeliveryUseCase()
 
     const delivery = await createDeliveryUseCase.execute({
       item_name,
-      id_client
+      id_client: user_id
     })
 
     return response.json(delivery)
